@@ -132,6 +132,16 @@ document.addEventListener("DOMContentLoaded", () => {
   // Select all buttons and their corresponding h2 elements
   const questionElements = document.querySelectorAll(".question-box h2, .faq-card-question-and-answer button");
 
+  // Select the first answer box and expand it by default
+  const firstAnswerBox = document.querySelector(".faq-card-question-and-answer .answer-box");
+  const firstButton = document.querySelector(".faq-card-question-and-answer button");
+  
+  if (firstAnswerBox && firstButton) {
+    firstAnswerBox.style.display = "block"; // Make it visible
+    firstAnswerBox.style.maxHeight = firstAnswerBox.scrollHeight + "px"; // Expand it
+    firstButton.querySelector("img").src = "assets/images/icon-minus.svg"; // Set to minus icon
+  }
+
   questionElements.forEach((element) => {
     element.addEventListener("click", (event) => {
       // Find the corresponding answer box
@@ -178,4 +188,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 </script>
