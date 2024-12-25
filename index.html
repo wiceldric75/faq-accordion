@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Frontend Mentor | FAQ accordion</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header></header>
+      <section class="faq-card">
+        <div class="faq-card-header">
+          <img
+            src="assets/images/icon-star.svg"
+            alt="star image"
+            class="star-image"
+          />
+          <h1>FAQs</h1>
+        </div>
+        <div class="faq-card-questions-and-answers">
+          <div class="faq-card-question-and-answer">
+            <div class="question-box">
+              <h2>What is Frontend Mentor, and how will it help me?</h2>
+              <button class="q1-btn"  tabindex="1">
+                <img
+                  src="assets/images/icon-plus.svg"
+                  alt="expand contract button"
+                />
+              </button>
+            </div>
+            <div class="answer-box">
+              <p>
+                Frontend Mentor offers realistic coding challenges to help
+                developers improve their frontend coding skills with projects in
+                HTML, CSS, and JavaScript. It's suitable for all levels and ideal
+                for portfolio building.
+              </p>
+            </div>
+          </div>
+          <hr>
+          <div class="faq-card-question-and-answer">
+            <div class="question-box">
+              <h2>Is Frontend Mentor free?</h2>
+              <button class="q2-btn" tabindex="1">
+                <img
+                  src="assets/images/icon-plus.svg"
+                  alt="expand contract button"
+                />
+              </button>
+            </div>
+            <div class="answer-box">
+              <p>
+                Yes, Frontend Mentor offers both free and premium coding
+                challenges, with the free option providing access to a range of
+                projects suitable for all skill levels.
+              </p>
+            </div>
+          </div>
+          <hr>
+          <div class="faq-card-question-and-answer">
+            <div class="question-box">
+              <h2>Can I use Frontend Mentor projects in my portfolio?</h2>
+              <button class="q3-btn" tabindex="1">
+                <img
+                  src="assets/images/icon-plus.svg"
+                  alt="expand contract button"
+                />
+              </button>
+            </div>
+            <div class="answer-box answer-box3">
+              <p>
+                Yes, you can use projects completed on Frontend Mentor in your
+                portfolio. It's an excellent way to showcase your skills to
+                potential employers!
+              </p>
+            </div>
+          </div>
+          <hr>
+          <div class="faq-card-question-and-answer">
+            <div class="question-box">
+              <h2>
+                How can I get help if I'm stuck on a Frontend Mentor challenge?
+              </h2>
+              <button class="q4-btn" tabindex="1">
+                <img
+                  src="assets/images/icon-plus.svg"
+                  alt="expand contract button"
+                />
+              </button>
+            </div>
+            <div class="answer-box">
+              <p>
+                The best place to get help is inside Frontend Mentor's Discord
+                community. There's a help channel where you can ask questions and
+                seek support from other community members.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
+<script>
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Select all buttons and their corresponding h2 elements
+  const questionElements = document.querySelectorAll(".question-box h2, .faq-card-question-and-answer button");
+
+  questionElements.forEach((element) => {
+    element.addEventListener("click", (event) => {
+      // Find the corresponding answer box
+      const parent = event.target.closest(".question-box");
+      const answerBox = parent.nextElementSibling;
+      const button = parent.querySelector("button");
+      const isExpanded = answerBox.style.maxHeight; // Check if the box is expanded
+
+      // Collapse all other answer boxes
+      document.querySelectorAll(".answer-box").forEach((box) => {
+        if (box !== answerBox) {
+          box.style.maxHeight = null; // Collapse other answer boxes
+          box.style.display = "none"; // Ensure it's hidden
+          box.previousElementSibling.querySelector("button img").src = "assets/images/icon-plus.svg"; // Reset to plus icon
+        }
+      });
+
+      // Toggle the current answer box
+      if (isExpanded) {
+        // Collapse the current box
+        answerBox.style.maxHeight = null;
+        setTimeout(() => {
+          answerBox.style.display = "none"; // Ensure it fully hides after animation
+        }, 300); // Match the transition duration
+        button.querySelector("img").src = "assets/images/icon-plus.svg"; // Change to plus icon
+      } else {
+        // Expand the current box
+        answerBox.style.display = "block"; // Make it visible
+        setTimeout(() => {
+          answerBox.style.maxHeight = answerBox.scrollHeight + "px"; // Animate height
+        }, 10); // Add slight delay for smooth transition
+        button.querySelector("img").src = "assets/images/icon-minus.svg"; // Change to minus icon
+      }
+    });
+  });
+
+  // Listen for the Escape key to remove focus from buttons
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      // Remove focus from all buttons
+      document.querySelectorAll(".faq-card-question-and-answer button").forEach((button) => {
+        button.blur(); // Remove the focus highlight
+      });
+    }
+  });
+});
+</script>
